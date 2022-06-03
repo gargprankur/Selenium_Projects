@@ -1,0 +1,22 @@
+2022-05-27 10:04:11,181-User has provided Starting _Date as 27/05/2022, 
+                              Ending _Date as 31/05/2022,
+                              Epack number as 9900 and 
+                              Days as 5
+2022-05-27 10:04:11,195-Please enter the date in %m/%d/%Y format. Exiting the test
+2022-05-27 10:05:05,987-User has provided Starting _Date as 05/27/2022, 
+                              Ending _Date as 05/31/2022,
+                              Epack number as 9900 and 
+                              Days as 5
+2022-05-27 10:05:05,993-Format of date inputs is matched
+2022-05-27 10:05:30,485-We are going to create Qual with name Cumulative_Epack_9900
+2022-05-27 10:05:38,791- Error ocurred while creating qual and message is That name is taken
+2022-05-27 10:08:17,725-User has provided Starting _Date as 05/27/2022, 
+                              Ending _Date as 05/31/2022,
+                              Epack number as 9999 and 
+                              Days as 5
+2022-05-27 10:08:17,751-Format of date inputs is matched
+2022-05-27 10:08:34,646-We are going to create Qual with name Cumulative_Epack_9999
+2022-05-27 10:08:47,173-Qual name is unique. Going further with creating qual name
+2022-05-27 10:09:02,307-"Cumulative_Epack_9999"
+2022-05-27 10:09:02,307-Now when Qual is created, we will now add it to Test Cycle
+2022-05-27 10:09:03,919-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 

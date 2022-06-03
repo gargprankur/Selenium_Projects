@@ -1,0 +1,10 @@
+2022-05-31 15:08:07,461-User has provided Starting _Date as 05/31/2022, 
+                              Ending _Date as 06/06/2022,
+                              Epack number as 9998 and 
+                              Days as 7
+2022-05-31 15:08:07,477-Format of date inputs is matched
+2022-05-31 15:08:18,003-We are going to create Qual with name Cumulative_Epack_9998
+2022-05-31 15:08:30,634-Qual name is unique. Going further with creating qual name
+2022-05-31 15:08:43,224-"Cumulative_Epack_9998"
+2022-05-31 15:08:43,224-Now when Qual is created, we will now add it to Test Cycle
+2022-05-31 15:08:44,774-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
