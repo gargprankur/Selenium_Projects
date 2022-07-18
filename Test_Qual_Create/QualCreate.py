@@ -7,10 +7,9 @@ Date: 18th July 2022
 
 # Base Imports
 import argparse
-import datetime
 import logging
 import sys
-from datetime import datetime
+import datetime
 
 sys.path.insert(0 , '..')
 
@@ -32,7 +31,8 @@ Once qual is created, it adds it to the Cumulative epack test cycle and then mat
 
 class QualCreate(BaseClass):
     def __init__(self):
-        """In Init function we will initialize loggers and create a log file name"""
+        """In Init function we will initialize loggers and create a log file name, will get today's date and date
+        after 7 days """
         self._current_time = datetime.datetime.now()
         self._current_time = self._current_time.strftime("%Y%m%d")
         self._log_name = "selenium_" + self._current_time + ".log"
@@ -42,62 +42,22 @@ class QualCreate(BaseClass):
         self._logger.addHandler(self._handler)
         self._formatter = logging.Formatter('%(asctime)s-%(levelname)s-%(message)s')
         self._handler.setFormatter(self._formatter)
-
+        self._starting_date_1 = datetime.datetime.now()
+        self._starting_date = self._starting_date_1.strftime("%m/%d/%Y")
+        time_delta = datetime.timedelta(days=7)
+        self._ending_date = self._starting_date_1 + time_delta
+        self._ending_date = self._ending_date.strftime("%m/%d/%Y")
+        self._days = 7
 
     def parse_commandline_args(self):
         """ In this function, we will parse command line arguments provided by user and check if there are in correct
         format """
-        parser = argparse.ArgumentParser(description="""This Program will need 4 parameters to be passed by user
-                                                     1. Epack Number \n 2. Starting date(mm/dd/yyyy format) \n 3. End
-                                                     Date \n 4. Days""")
+        parser = argparse.ArgumentParser(description="""This Program will need 1 parameter to be passed by user
+                                                     1. Epack Number(Integer) """)
 
         parser.add_argument('--epack', type=int, help="EPack Number(Integer)", required=True)
-
-        parser.add_argument('--starting_date', type=str, help="Starting Date(Date)", required=True)
-
-        parser.add_argument('--ending_date', type=str, help="End Date(Date)", required=True)
-
-        parser.add_argument('--days', type=int, help="Days(Integer)", required=True)
-
-        variables = ['--starting_date', '--ending_date', '--days', '--epack']
-
-        args = sys.argv[1:]
-
-        check = all(items in args for items in variables)
-
-        self._logger.info(f"Value of flag checking if all cmd args are provided is {check}")
-
-        if not check or len(args) < 8:
-            self.driver.close()
-            self._logger.error("User didn't provide correct parameters and values")
-            sys.exit("Please Provide all parameter and their respective values")
-        
-        str_format = "%m/%d/%Y"
-
         self._parse_args = parser.parse_args()
-
-        self._starting_date = self._parse_args.starting_date
-
-        self._ending_date = self._parse_args.ending_date
-
         self._epack = self._parse_args.epack
-
-        self._days = self._parse_args.days
-
-        self._logger.info(f'''User has provided Starting _Date as {self._parse_args.starting_date}, 
-                                      Ending _Date as {self._parse_args.ending_date},
-                                      Epack number as {self._parse_args.epack} and 
-                                      Days as {self._parse_args.days}''')
-        try:
-            if datetime.datetime.strptime(self._parse_args.starting_date, str_format) and \
-                    datetime.datetime.strptime(self._parse_args.ending_date, str_format):
-
-                self._logger.info("Format of date inputs is matched")
-
-        except ValueError:
-            self.driver.close()
-            self._logger.info("Please enter the date in %m/%d/%Y format. Exiting the test")
-            sys.exit("Please Provide date in correct format")
 
     def qual_create(self):
         """
