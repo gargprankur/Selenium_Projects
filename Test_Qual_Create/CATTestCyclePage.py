@@ -10,7 +10,8 @@ class CATTestCyclePage:
 
     qual_field = (By.XPATH, "//td[@class = 'rcbInputCell rcbInputCellLeft']/input[@id = 'ctl00_m_genQual_cb_Input']")
 
-    days_field = (By.XPATH, '//input[@id = "ctl00_m_genQualOccur"]')
+    days_field = (By.XPATH, '//span[text() = "Duration"]/parent::td/input')
+    #days_field = (By.XPATH, '//input[@id = "ctl00_m_genQualOccur"]')
 
     starting_date_field = (By.XPATH, '//input[@id = "ctl00_m_genQualStart_dateInput"]')
 
@@ -18,8 +19,8 @@ class CATTestCyclePage:
 
     add_button = (By.XPATH, '//input[@value = "Add"]')
 
-    save_button = (By.XPATH, '//span[@id = "ctl00_ButtonPanel"]/a[text() = "Save"]')
-
+    #save_button = (By.XPATH, '//span[@id = "ctl00_ButtonPanel"]/a[text() = "Save"]')
+    save_button = (By.XPATH, '//a[text() = "Save"]')
     more_actions = (By.XPATH, '//a[@class = "more-actions-a"]')
 
     materialize = (By.XPATH, '//a[text() = "Materialize"]')

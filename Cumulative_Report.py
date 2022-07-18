@@ -37,7 +37,7 @@ driver.find_element(by = By.XPATH, value = '//div[@data-parametername = "QualIDs
 wait.until(expected_conditions.element_to_be_clickable((By.XPATH, '//div[@data-parametername = "QualIDs"]/div/table/tbody/tr/td/input')))
 driver.find_element(by = By.XPATH, value = '//div[@data-parametername = "QualIDs"]/div/table/tbody/tr/td/input').click()
 driver.find_element(by = By.XPATH, value = '//label[contains(text(), "(Select All)")]').click()
-driver.find_element(by = By.XPATH, value = '//label[contains(text(), "9605")]').click()
+driver.find_element(by = By.XPATH, value = '//label[contains(text(), "9690")]').click()
 
 driver.find_element(by = By.XPATH, value = '//div[@data-parametername = "Approved"]/div/table/tbody/tr/td/input').click()
 driver.find_element(by = By.XPATH, value = '//label[contains(text(), "(Select All)")]').click()

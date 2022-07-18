@@ -3,8 +3,9 @@ from selenium.webdriver.common.by import By
 
 class CumulativeReportHome:
 
-    def __init__(self, driver):
+    def __init__(self, driver, epack):
         self.driver = driver
+        self.epack = epack
 
     iframe = (By.XPATH, '"iframe"')
     product = (By.XPATH, '//div[@data-parametername = "Product"]/select')
@@ -13,7 +14,8 @@ class CumulativeReportHome:
     selected_test_cycle = (By.XPATH, '//label[contains(text(), "Cumulative")]')
     select_all = (By.XPATH, '//label[contains(text(), "(Select All)")]')
     qual = (By.XPATH, '//div[@data-parametername = "QualIDs"]/div/table/tbody/tr/td/input')
-    selected_qual = (By.XPATH, '//label[contains(text(), "9605")]')
+    epack = "9690"
+    selected_qual = (By.XPATH, '//label[contains(text(), "9690")]')
     approved = (By.XPATH, '//div[@data-parametername = "Approved"]/div/table/tbody/tr/td/input')
     approve_all = (By.XPATH, '//label[contains(text(), "(Select All)")]')
     submit = (By.XPATH, '//input[@type = "submit"]')

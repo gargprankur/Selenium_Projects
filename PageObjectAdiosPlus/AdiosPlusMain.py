@@ -9,7 +9,8 @@ sys.path.insert(0, "..")
 """Selenium Packages"""
 import argparse
 
-from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
+from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException, \
+    ElementNotInteractableException
 from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions
 """ 
@@ -62,17 +63,19 @@ class AdiosPlusMain(BaseClass):
         self._logger.info(f"User has entered Test Cycle name as {self._test_cycle} and qual Name as {self._qual}")
 
 
-    def test_run_automation(self):
+    def adios_plus_login(self):
         self.driver.get("http://adiosplus.cec.lab.emc.com/dashboard")
-        home_adios_plus = AdiosPlusHome(self.driver)
-        user_name = home_adios_plus.get_user_name()
+        self._home_adios_plus = AdiosPlusHome(self.driver)
+        user_name = self._home_adios_plus.get_user_name()
         user_name.send_keys("gargp6")
-        user_password = home_adios_plus.get_user_password()
+        user_password = self._home_adios_plus.get_user_password()
         user_password.send_keys("June@11jun")
-        submit_button = home_adios_plus.submit_button()
+        submit_button = self._home_adios_plus.submit_button()
         submit_button.click()
         self._logger.info("User has entered username and password and logging into Adios Page")
-        element = home_adios_plus.navigate_resources()
+
+    def navigate_resources_page(self):
+        element = self._home_adios_plus.navigate_resources()
         self.driver.execute_script("arguments[0].click();", element)
         self._logger.info("We are resource tab of Adios Page")
         resource_page = AdiosPlusResourcesPage(self.driver)
@@ -86,12 +89,12 @@ class AdiosPlusMain(BaseClass):
         data_services_suites = {
                   "Cumulative_Testing_P2": "10.60.153.253",
                   "Cumulative_Testing_P3": "10.60.153.195",
-                  "Cumulative_Testing_P4": "10.60.153.195",
                   "Defrag_Shrink_SP_Cumulative": "10.60.154.6",
                   "LREP_SP_Cumulative" : "10.60.154.51",
                   "RDF_SP_Cumulative" : "10.60.155.123",
                   "Cumulative_Testing_P1" : "10.60.153.202",
-                  "Long_Running_Tests_SP_Cumulative": "10.60.153.132"
+                  "Long_Running_Tests_SP_Cumulative": "10.60.153.132",
+                  "Cumulative_Testing_P4": "10.60.153.195"
                   }
 
         core_suites = {
@@ -101,20 +104,21 @@ class AdiosPlusMain(BaseClass):
                     "ACT Backend" : "10.60.153.55",
                     "ACS_Enginuity Services" : "10.60.153.55"
                     }
-        suites = ""
+        self._suites = {}
         if self._team == "core":
-            suites = core_suites
+            self._suites = core_suites
         elif self._team == "data-services":
-            suites = data_services_suites
+            self._suites = data_services_suites
 
-        dict_value = [value for value in suites.values()]
-        dict_keys = [value for value in suites.keys()]
-        print(dict_value)
-        print(dict_keys)
-        for host in dict_value:
+        self._dict_value = [value for value in self._suites.values()]
+        self._dict_keys = [value for value in self._suites.keys()]
+        print(self._dict_value)
+        print(self._dict_keys)
+        for host in self._dict_value:
             try:
                 search = resource_page.search_host()
-                search.click()
+                self.driver.execute_script("arguments[0].click()", search)
+                #search.click()
             except ElementClickInterceptedException:
                 search = resource_page.search_host()
                 search.click()
@@ -132,9 +136,10 @@ class AdiosPlusMain(BaseClass):
             confirm = resource_page.confirm_button()
             confirm.click()
             time.sleep(2)
-            self._logger.info(f"Successfully added  {host} in resource tab of Adios Page")
+            self._logger.info(f"Successfully added {host} in resource tab of Adios Page")
 
-        element = home_adios_plus.navigate_despatch()
+    def navigate_dispatch(self):
+        element = self._home_adios_plus.navigate_despatch()
         self.driver.execute_script("arguments[0].click();", element)
         self._logger.info(f" Now when we have resources added. Will add suites to Dispatch tab")
 
@@ -148,7 +153,7 @@ class AdiosPlusMain(BaseClass):
         handles = self.driver.window_handles
         self.driver.switch_to.window(handles[0])
         self._logger.info("Navigated to dispatch page of Adios Page")
-        for suite in dict_keys:
+        for suite in self._dict_keys:
             self.wait.until(expected_conditions.element_to_be_clickable((AdiosPlusDespatch.clear_filter)))
             clear_button = despatch_page.clear_filter_button()
             clear_button.click()
@@ -180,12 +185,15 @@ class AdiosPlusMain(BaseClass):
 
         self._logger.info(f"Successfully added all suites to View")
 
-        for key, value in suites.items():
+        for key, value in self._suites.items():
             suite_search = despatch_page.search_suite_to_run()
             self._logger.info(f'Selected suite {key} to run on host {value}')
             suite_search.send_keys(key)
 
-            add_button = despatch_page.suite_add_button()
+            try:
+                add_button = despatch_page.suite_add_button()
+            except ElementClickInterceptedException as ex:
+                add_button = despatch_page.suite_add_button()
             add_button.click()
 
             try:
@@ -201,12 +209,13 @@ class AdiosPlusMain(BaseClass):
             test_cycle.send_keys(self._test_cycle)
 
             test_cycle.send_keys(Keys.ENTER)
-
+            time.sleep(1)
             qual = despatch_page.qual_input()
 
             qual.send_keys(self._qual)
 
             qual.send_keys(Keys.ENTER)
+            time.sleep(2)
 
             host = despatch_page.host_input()
             host.send_keys(value)
@@ -222,9 +231,11 @@ class AdiosPlusMain(BaseClass):
                 message = message.text
                 if "ready to run" in message:
                     self._logger.info(f'Despatcher state of Host {value} is ready')
+                    time.sleep(8)
                     box = despatch_page.select_symm()
                     box.send_keys("OLKCK")
                     box.send_keys(Keys.ENTER)
+                    time.sleep(2)
 
                     self.wait.until(expected_conditions.element_to_be_clickable((AdiosPlusDespatch.run)))
                     run_button = despatch_page.run_button()
@@ -235,30 +246,40 @@ class AdiosPlusMain(BaseClass):
                     time.sleep(5)
                     ok_button = despatch_page.ok_button_function()
                     ok_button.click()
-
+                    time.sleep(20)
                     self.wait.until(expected_conditions.presence_of_element_located((AdiosPlusDespatch.after_run_message)))
 
                     self.driver.get_screenshot_as_file(f'{key}.png')
                     time.sleep(30)
+
+                    search_field = despatch_page.search_suite_text_field()
+
                     clear_suite = despatch_page.clear_search_suite()
                     clear_suite.click()
 
-                    deselect_suite = despatch_page.deselect_suite_link()
-                    deselect_suite.click()
+                    despatch_page.deselect_suite_link().click()
+                    time.sleep(4)
+
                 else:
-                    self._logger.info(f'Despatcher state of Host {value} is not in ready state ')
+                    self._logger.info(f'Despatcher state of Host {value} is not in ready state')
+                    print("host is not in ready state")
                     clear_suite = despatch_page.clear_search_suite()
                     clear_suite.click()
+                    print("Clearing suite")
+                    time.sleep(5)
 
                     deselect_suite = despatch_page.deselect_suite_link()
                     deselect_suite.click()
+                    time.sleep(4)
                     continue
         self.driver.close()
 
 
 obj = AdiosPlusMain()
 obj.parse_commandline_args()
-obj.test_run_automation()
+obj.adios_plus_login()
+obj.navigate_resources_page()
+obj.navigate_dispatch()
 
 
 

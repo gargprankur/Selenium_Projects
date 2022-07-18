@@ -10,7 +10,7 @@ class CATQualPage:
 
     qual_name = (By.XPATH, '//input[@value = "Clone of: Cummulative Epack 9537"]')
 
-    qual_description = (By.XPATH, '//input[@value = "Clone of: Cummulative Epack 9537"]')
+    qual_description = (By.XPATH, '//textarea[contains(text(), "9537 Cummulative Epack Testin")]')
 
     qual_exists = (By.XPATH, '//label[@class = "error"]')
 

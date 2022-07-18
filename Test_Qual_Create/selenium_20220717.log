@@ -1,0 +1,116 @@
+2022-07-17 08:41:38,973-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3100 and 
+                                      Days as 7
+2022-07-17 08:41:38,975-INFO-Format of date inputs is matched
+2022-07-17 08:42:06,482-INFO-We are going to create Qual with name Cumulative_Epack_3100
+2022-07-17 08:43:26,085-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 08:43:44,420-INFO- There is an alert popped up and the message of alert is Mandatory inputs missing. Select Qual, both dates and greater than a day window.
+2022-07-17 08:45:56,973-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3100 and 
+                                      Days as 7
+2022-07-17 08:45:56,975-INFO-Format of date inputs is matched
+2022-07-17 08:46:05,656-INFO-We are going to create Qual with name Cumulative_Epack_3100
+2022-07-17 08:46:08,850-INFO- Error occurred while creating qual and message is That name is taken
+2022-07-17 08:48:32,705-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3101 and 
+                                      Days as 7
+2022-07-17 08:48:32,707-INFO-Format of date inputs is matched
+2022-07-17 08:48:39,489-INFO-We are going to create Qual with name Cumulative_Epack_3101
+2022-07-17 08:49:42,557-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 08:49:57,728-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 08:53:09,445-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3102 and 
+                                      Days as 7
+2022-07-17 08:53:09,448-INFO-Format of date inputs is matched
+2022-07-17 08:53:16,870-INFO-We are going to create Qual with name Cumulative_Epack_3102
+2022-07-17 08:54:19,844-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 08:54:34,807-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 08:56:43,184-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3103 and 
+                                      Days as 7
+2022-07-17 08:56:43,186-INFO-Format of date inputs is matched
+2022-07-17 08:56:50,134-INFO-We are going to create Qual with name Cumulative_Epack_3103
+2022-07-17 08:57:52,490-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 08:58:18,578-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 09:05:27,954-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3104 and 
+                                      Days as 7
+2022-07-17 09:05:27,956-INFO-Format of date inputs is matched
+2022-07-17 09:06:25,182-INFO-We are going to create Qual with name Cumulative_Epack_3104
+2022-07-17 09:37:00,240-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3105 and 
+                                      Days as 7
+2022-07-17 09:37:00,242-INFO-Format of date inputs is matched
+2022-07-17 09:37:33,167-INFO-We are going to create Qual with name Cumulative_Epack_3105
+2022-07-17 09:38:52,078-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 09:39:13,395-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 09:42:26,165-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3106 and 
+                                      Days as 7
+2022-07-17 09:42:26,168-INFO-Format of date inputs is matched
+2022-07-17 09:42:48,684-INFO-We are going to create Qual with name Cumulative_Epack_3106
+2022-07-17 09:43:51,515-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 09:44:25,176-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 09:47:55,148-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3107 and 
+                                      Days as 7
+2022-07-17 09:47:55,150-INFO-Format of date inputs is matched
+2022-07-17 09:48:01,765-INFO-We are going to create Qual with name Cumulative_Epack_3107
+2022-07-17 09:49:03,963-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 09:49:53,585-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 09:57:45,251-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3108 and 
+                                      Days as 7
+2022-07-17 09:57:45,253-INFO-Format of date inputs is matched
+2022-07-17 09:57:52,924-INFO-We are going to create Qual with name Cumulative_Epack_3108
+2022-07-17 09:58:55,315-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 09:59:46,417-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 10:03:31,237-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3109 and 
+                                      Days as 7
+2022-07-17 10:03:31,239-INFO-Format of date inputs is matched
+2022-07-17 10:03:40,495-INFO-We are going to create Qual with name Cumulative_Epack_3109
+2022-07-17 10:04:43,008-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 10:05:33,921-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 10:08:39,876-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3110 and 
+                                      Days as 7
+2022-07-17 10:08:39,878-INFO-Format of date inputs is matched
+2022-07-17 10:08:46,456-INFO-We are going to create Qual with name Cumulative_Epack_3110
+2022-07-17 10:09:48,590-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 10:10:38,924-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 10:12:49,265-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3111 and 
+                                      Days as 7
+2022-07-17 10:12:49,269-INFO-Format of date inputs is matched
+2022-07-17 10:12:56,963-INFO-We are going to create Qual with name Cumulative_Epack_3111
+2022-07-17 10:13:59,197-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 10:14:46,819-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 
+2022-07-17 10:51:35,206-INFO-Value of flag checking if all cmd args are provided is True
+2022-07-17 10:51:35,208-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3112 and 
+                                      Days as 7
+2022-07-17 10:51:35,209-INFO-Format of date inputs is matched
+2022-07-17 10:53:17,430-INFO-Value of flag checking if all cmd args are provided is True
+2022-07-17 10:53:17,431-INFO-User has provided Starting _Date as 07/18/2022, 
+                                      Ending _Date as 07/25/2022,
+                                      Epack number as 3112 and 
+                                      Days as 7
+2022-07-17 10:53:17,435-INFO-Format of date inputs is matched
+2022-07-17 10:53:29,757-INFO-We are going to create Qual with name Cumulative_Epack_3112
+2022-07-17 10:54:33,447-INFO-Qual name is unique. Going further with creating qual name
+2022-07-17 10:55:06,356-INFO-Qual was not added to test cycle previously. Proceeding further with adding it the test cycle 

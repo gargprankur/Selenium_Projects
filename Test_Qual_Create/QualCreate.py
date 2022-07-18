@@ -1,16 +1,34 @@
 
+"""
+Created By: Prankur Garg
+Email Id: prankur.garg1@emc.com, p.garg@dell.com
+Date: 18th July 2022
+"""
+
+# Base Imports
 import argparse
 import datetime
 import logging
 import sys
+from datetime import datetime
 
+sys.path.insert(0 , '..')
+
+# Imports Selenium Packages
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException
 from selenium.webdriver.support import expected_conditions
-sys.path.insert(0,'..')
+
+# Page Object classes of CAT functionality Imports
 from Cumulative_Reporting.BaseClass import BaseClass
 from Test_Qual_Create.CATQualPage import CATQualPage
 from Test_Qual_Create.CATTestCyclePage import CATTestCyclePage
 
+"""
+This class is for creating a qual based on the epack number given by user.
+Once qual is created, it adds it to the Cumulative epack test cycle and then materialize the cycle
+"""
 
 class QualCreate(BaseClass):
     def __init__(self):
@@ -32,27 +50,40 @@ class QualCreate(BaseClass):
         parser = argparse.ArgumentParser(description="""This Program will need 4 parameters to be passed by user
                                                      1. Epack Number \n 2. Starting date(mm/dd/yyyy format) \n 3. End
                                                      Date \n 4. Days""")
+
         parser.add_argument('--epack', type=int, help="EPack Number(Integer)", required=True)
+
         parser.add_argument('--starting_date', type=str, help="Starting Date(Date)", required=True)
+
         parser.add_argument('--ending_date', type=str, help="End Date(Date)", required=True)
+
         parser.add_argument('--days', type=int, help="Days(Integer)", required=True)
 
         variables = ['--starting_date', '--ending_date', '--days', '--epack']
+
         args = sys.argv[1:]
+
         check = all(items in args for items in variables)
-        print(check)
+
+        self._logger.info(f"Value of flag checking if all cmd args are provided is {check}")
+
         if not check or len(args) < 8:
             self.driver.close()
-            self._parse_args = parser.parse_args()
             self._logger.error("User didn't provide correct parameters and values")
             sys.exit("Please Provide all parameter and their respective values")
         
         str_format = "%m/%d/%Y"
+
         self._parse_args = parser.parse_args()
+
         self._starting_date = self._parse_args.starting_date
+
         self._ending_date = self._parse_args.ending_date
+
         self._epack = self._parse_args.epack
+
         self._days = self._parse_args.days
+
         self._logger.info(f'''User has provided Starting _Date as {self._parse_args.starting_date}, 
                                       Ending _Date as {self._parse_args.ending_date},
                                       Epack number as {self._parse_args.epack} and 
@@ -60,12 +91,18 @@ class QualCreate(BaseClass):
         try:
             if datetime.datetime.strptime(self._parse_args.starting_date, str_format) and \
                     datetime.datetime.strptime(self._parse_args.ending_date, str_format):
+
                 self._logger.info("Format of date inputs is matched")
+
         except ValueError:
+            self.driver.close()
             self._logger.info("Please enter the date in %m/%d/%Y format. Exiting the test")
             sys.exit("Please Provide date in correct format")
 
     def qual_create(self):
+        """
+        This is the function which creates the qual. Checks if qual name already exists.
+        """
         self.driver.get('http://catprd.corp.emc.com/Tests/Quals/View.aspx?name=cummulative&sActive=2&sPublicPrivate'
                         '=&id=13791')
 
@@ -90,7 +127,8 @@ class QualCreate(BaseClass):
         try:
             qual_exists = qual_page.qual_exists_error()
             error_message = qual_exists.text
-            self._logger.info(f' Error ocurred while creating qual and message is {error_message}')
+            self._logger.error(f' Error occurred while creating qual and message is {error_message}')
+            self.driver.close()
             sys.exit("The Qual name is already selected. Please try with different name")
 
         except NoSuchElementException as ex:
@@ -101,30 +139,45 @@ class QualCreate(BaseClass):
             save.click()
             self.driver.close()
 
-
-
     def add_qual_to_test_cycle(self):
+        """
+        This is the function to add qual to test cycle and then materialize it.
+        :return:
+        """
+        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        self.driver.maximize_window()
+        self.driver.implicitly_wait(30)
         self.driver.get("http://catprd.corp.emc.com/Tests/Cycles/Edit.aspx?sName=cumulative&sIsDynamic=&sActive=2&id"
                         "=3871")
+
         self._epack_text_new = "\"" + self._epack_text + "\""
+
         test_cycle_page = CATTestCyclePage(self.driver, self._epack_text_new)
 
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
         qual_field = test_cycle_page.qual_field_textbox()
+
         qual_field.send_keys(self._epack_text)
 
         select_qual = test_cycle_page.select_qual()
+
         select_qual.click()
 
         start_date = test_cycle_page.enter_starting_date()
+
         start_date.send_keys(self._starting_date)
 
-        end_date = test_cycle_page.enter_starting_date()
+        end_date = test_cycle_page.enter_ending_date()
+
         end_date.send_keys(self._ending_date)
 
         days = test_cycle_page.enter_days()
+
         days.send_keys(self._days)
 
         add_button = test_cycle_page.add_button_click()
+
         add_button.click()
 
         try:
@@ -137,22 +190,28 @@ class QualCreate(BaseClass):
             self._logger.info("Qual was not added to test cycle previously. Proceeding further with adding it the "
                               "test cycle ")
 
-        save_button = test_cycle_page.add_button_click()
+        self.driver.execute_script("window.scrollTo(document.body.scrollHeight, 0);")
+
+        save_button = test_cycle_page.save_button_click()
+
         save_button.click()
 
         more_actions = test_cycle_page.more_actions_click()
+
         more_actions.click()
 
         materialize = test_cycle_page.materialize_qual()
+
         materialize.click()
 
         self.driver.close()
 
 
-qual_create = QualCreate()
-qual_create.parse_commandline_args()
-qual_create.qual_create()
-qual_create.add_qual_to_test_cycle()
+if __name__ == '__main__':
+    qual_create = QualCreate()
+    qual_create.parse_commandline_args()
+    qual_create.qual_create()
+    qual_create.add_qual_to_test_cycle()
 
 
 

@@ -22,6 +22,8 @@ class AdiosPlusDespatch:
 
     run_suite = (By.XPATH, '//input[@class = "ant-input"]')
 
+    suite_search = (By.XPATH, '//input[@placeholder = "Suite list filter"]')
+
     search_run_suite = (By.XPATH, '//button[contains(@class,"ant-input-search-button")]')
 
     select_suite_to_run = (By.XPATH, '//span[@class = "ant-tree-checkbox-inner"]')
@@ -122,3 +124,6 @@ class AdiosPlusDespatch:
 
     def close_button(self):
         return self.driver.find_element(*AdiosPlusDespatch.close)
+
+    def search_suite_text_field(self):
+        return self.driver.find_element(*AdiosPlusDespatch.suite_name)

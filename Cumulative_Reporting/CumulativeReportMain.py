@@ -2,17 +2,29 @@ import time
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import StaleElementReferenceException
-from Cumulative_Reporting.BaseClass import BaseClass
-from Cumulative_Reporting.CumulativeReportHome import CumulativeReportHome
+from BaseClass import BaseClass
+from CumulativeReportHome import CumulativeReportHome
+import sys
+import os
 
+path_dir = os.getcwd()
+sys.path.insert(0, "..")
+
+import argparse
 
 class CumulativeReportMain(BaseClass):
+    def parse_cmdline_args(self):
+        parser = argparse.ArgumentParser("help = Need to provide epack number")
+        parser.add_argument('--epack', type = int, required= True)
+        parsed_args = parser.parse_args()
+        self._epack = parsed_args.epack
 
     def test_run_automation(self):
+
         self.driver.get("http://estsqlrptprd001.corp.emc.com/Reports_SSRS/report/CAT/Test%20Cycle%20Details%20("
                         "All%20Results)")
         time.sleep(20)
-        home_page = CumulativeReportHome(self.driver)
+        home_page = CumulativeReportHome(self.driver, self._epack)
         self.driver.switch_to.frame(0)
         product = home_page.get_product()
         select = Select(product)
@@ -77,6 +89,7 @@ class CumulativeReportMain(BaseClass):
 
 
 obj = CumulativeReportMain()
+obj.parse_cmdline_args()
 obj.test_run_automation()
 
 
