@@ -44,8 +44,8 @@ class AdiosPlusMain(BaseClass):
 
     def parse_commandline_args(self):
         parser = argparse.ArgumentParser(description="Need to enter test cycle, qual name and team name")
-        parser.add_argument('--test_cycle', type=str, help="Test Cycle", required=True)
-        parser.add_argument('--qual', type=str, help="Qual Name", required=True)
+        parser.add_argument('--test_cycle', type=str, help="Cumulative epack test cycle", required=True)
+        parser.add_argument('--qual', type=str, help="e.g. Cumulative_Epack_<Epack no>", required=True)
         parser.add_argument('--team', type = str, help = "Enter Team Name core/data-services", required= True)
         if len(sys.argv[1:]) < 6 or '--test_cycle' not in sys.argv[1:] or '--qual' not in sys.argv[1:] or '--team' not in sys.argv[1:]:
             self.driver.close()
