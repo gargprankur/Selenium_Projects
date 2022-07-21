@@ -1,4 +1,6 @@
 import time
+
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import StaleElementReferenceException
@@ -24,6 +26,8 @@ class CumulativeReportMain(BaseClass):
         self.driver.get("http://estsqlrptprd001.corp.emc.com/Reports_SSRS/report/CAT/Test%20Cycle%20Details%20("
                         "All%20Results)")
         time.sleep(20)
+        #selected_qual = self.driver.find_element(By.XPATH, "\'//label[contains(text(),\' + str(self._epack) + ")]"
+
         home_page = CumulativeReportHome(self.driver, self._epack)
         self.driver.switch_to.frame(0)
         product = home_page.get_product()
@@ -54,21 +58,17 @@ class CumulativeReportMain(BaseClass):
         try:
             qual = home_page.select_qual_input()
             qual.click()
-            self.driver.get_screenshot_as_file("first_qual_click.png")
+
             self.wait.until(expected_conditions.element_to_be_clickable((CumulativeReportHome.qual)))
             qual = home_page.select_qual_input()
             qual.click()
         except StaleElementReferenceException as ex:
             qual = home_page.select_qual_input()
             qual.click()
-            self.driver.get_screenshot_as_file("second_qual_click.png")
-
         select_all = home_page.get_select_all()
         select_all.click()
-
-        qual = home_page.select_qual()
-        qual.click()
-
+        selected_qual = self.driver.find_element(By.XPATH, f'//label[contains(text(), \"{str(self._epack)}\")]')
+        selected_qual.click()
         approved = home_page.get_approved()
         approved.click()
 
