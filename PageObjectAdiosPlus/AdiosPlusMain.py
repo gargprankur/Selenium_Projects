@@ -69,7 +69,7 @@ class AdiosPlusMain(BaseClass):
         user_name = self._home_adios_plus.get_user_name()
         user_name.send_keys("gargp6")
         user_password = self._home_adios_plus.get_user_password()
-        user_password.send_keys("June@11jun")
+        user_password.send_keys("")
         submit_button = self._home_adios_plus.submit_button()
         submit_button.click()
         self._logger.info("User has entered username and password and logging into Adios Page")
